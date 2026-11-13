@@ -1,0 +1,215 @@
+# Heretical Development blog — site configuration.
+#
+# Theme: jekyll-theme-chirpy (packaged gem, see Gemfile / Gemfile.lock).
+# Hosting: GitHub project Pages, built locally and published manually to `gh-pages`.
+# Editorial rules: docs/editorial.md. Deployment: docs/deployment.md.
+
+# Import the theme
+theme: jekyll-theme-chirpy
+
+# Page language. Matches `_data/locales/en.yml` in this repository.
+lang: en
+
+# Post dates and build timestamps are interpreted in UTC.
+timezone: UTC
+
+# ---------------------------------------------------------------------------
+# jekyll-seo-tag
+# ---------------------------------------------------------------------------
+
+title: Heretical Development
+
+tagline: Development progress and engineering decisions from the Heretical workspace.
+
+description: >-
+  Internal development-progress record for the Heretical workspace: concise notes on
+  merged work, design decisions, experiments, milestones, and releases.
+
+# GitHub project Pages origin. Must not include a trailing slash or the base path.
+url: "https://heretical-solutions.github.io"
+
+github:
+  username: Heretical-Solutions
+
+social:
+  # Default post author and footer copyright owner.
+  name: Heretical Solutions
+  # No contact address is published by this site.
+  email:
+  fediverse_handle:
+  links:
+    # First element is the copyright owner's link. Organization profile only.
+    - https://github.com/Heretical-Solutions
+
+# No search-engine verification tokens are configured.
+webmaster_verifications:
+  google:
+  bing:
+  alexa:
+  yandex:
+  baidu:
+  facebook:
+
+# ---------------------------------------------------------------------------
+# Feature switches
+# ---------------------------------------------------------------------------
+
+# Analytics is disabled. Every provider id must stay empty.
+analytics:
+  google:
+    id:
+  goatcounter:
+    id:
+  umami:
+    id:
+    domain:
+  matomo:
+    id:
+    domain:
+  cloudflare:
+    id:
+  fathom:
+    id:
+
+# Page-view counters are disabled.
+pageviews:
+  provider:
+
+# Empty follows the visitor's system preference and shows the light/dark toggle.
+theme_mode:
+
+# No CDN endpoint. Media is served from the project Pages base path.
+cdn:
+
+# No sidebar avatar. The theme ships stock art; this product publishes none.
+avatar:
+
+# No site-wide social preview image. Individual posts may declare `image`.
+social_preview_image:
+
+# Auto-generated table of contents for posts.
+toc: true
+
+actions:
+  # Keep source-editing links out of this manually curated internal record.
+  edit_post:
+    enabled: false
+    url: ""
+    static_url: false
+
+comments:
+  # Comment systems are disabled for this internal record. Keep every value empty.
+  provider:
+  disqus:
+    shortname:
+  utterances:
+    repo:
+    issue_term:
+  giscus:
+    repo:
+    repo_id:
+    category:
+    category_id:
+    mapping:
+    strict:
+    input_position:
+    lang:
+    reactions_enabled:
+
+# Third-party front-end libraries are loaded from a CDN rather than self-hosted,
+# so no vendored JavaScript or CSS is distributed inside the static payload.
+# See docs/dependencies note in THIRD_PARTY_NOTICES.md.
+assets:
+  self_host:
+    enabled: false
+    env:
+
+# PWA/installable and offline caching are disabled.
+pwa:
+  enabled: false
+  cache:
+    enabled: false
+    deny_paths: []
+
+paginate: 10
+
+# Repository path of the GitHub project Pages site. Must not end with a slash.
+baseurl: "/Heretical-Blog"
+
+# ---------------------------------------------------------------------------
+# The following options are not recommended to be modified
+# ---------------------------------------------------------------------------
+
+kramdown:
+  footnote_backlink: "&#8617;&#xfe0e;"
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+
+collections:
+  tabs:
+    output: true
+    sort_by: order
+
+defaults:
+  - scope:
+      path: "" # An empty string here means all files in the project
+      type: posts
+    values:
+      layout: post
+      comments: false # Comment systems are disabled product-wide.
+      toc: true
+      # DO NOT modify this parameter unless every post link in the project is updated.
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
+      type: tabs # see `site.collections`
+    values:
+      layout: page
+      permalink: /:title/
+
+sass:
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  blanklines: false
+  ignore:
+    envs: [development]
+
+# Repository-only inputs are never published. `LICENSE` and `licenses/` stay
+# intentionally unlisted so required attribution travels inside the static payload.
+exclude:
+  - "*.gem"
+  - "*.gemspec"
+  - ".ruby-version"
+  - AGENTS.md
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - THIRD_PARTY_NOTICES.md
+  - artifacts
+  - docs
+  - eng
+  - vendor
+
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/

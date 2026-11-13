@@ -1,0 +1,24 @@
+# Normalise line endings by default.
+* text=auto
+
+# Engineering and theme scripts must stay LF so they run on Unix hosts.
+*.sh text eol=lf
+*.rb text eol=lf
+
+# Windows batch helpers stay CRLF.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Lock files and manifests are text but never line-numbered or diff-merged loosely.
+Gemfile.lock text eol=lf
+*.webmanifest text eol=lf
+
+# Truly binary assets are never rewritten by Git.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

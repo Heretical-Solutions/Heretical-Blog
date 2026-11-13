@@ -1,0 +1,12 @@
+# The contact options shown in the sidebar footer.
+#
+# Only the GitHub organization profile and this site's own Atom feed are published.
+# No e-mail address, Twitter/X account, or other invented social profile is configured.
+# `github` resolves to site.github.username and `rss` to <baseurl>/feed.xml.
+
+- type: github
+  icon: "fab fa-github"
+
+- type: rss
+  icon: "fas fa-rss"
+  noblank: true

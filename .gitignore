@@ -1,0 +1,27 @@
+# Restored Ruby dependencies (Bundler local path set by eng/restore.sh)
+.bundle/
+vendor/
+
+# Jekyll build cache
+.jekyll-cache/
+.jekyll-metadata
+
+# Generated site output
+_site/
+
+# Generated engineering output (site, validation reports, staged payloads)
+artifacts/
+
+# RubyGem packaging
+*.gem
+
+# Editor and operating-system noise
+.idea/
+.vscode/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# NOTE: Gemfile.lock is deliberately tracked. The upstream Chirpy starter ignores
+# it; this product commits it so dependency restore is deterministic.

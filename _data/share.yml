@@ -1,0 +1,6 @@
+# Sharing options at the bottom of each post.
+#
+# This internal development record publishes no third-party share-platform links.
+# The theme still renders its local "copy link" button.
+
+platforms: []
