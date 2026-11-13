@@ -1,0 +1,5 @@
+User-agent: *
+
+Disallow: /norobots/
+
+Sitemap: https://heretical-solutions.github.io/Heretical-Blog/sitemap.xml

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Heretical Development">
+  <rect width="512" height="512" rx="96" fill="#1b1f24"/>
+  <g fill="#f2f4f8">
+    <rect x="152" y="128" width="56" height="256"/>
+    <rect x="304" y="128" width="56" height="256"/>
+    <rect x="152" y="228" width="208" height="56"/>
+  </g>
+</svg>
