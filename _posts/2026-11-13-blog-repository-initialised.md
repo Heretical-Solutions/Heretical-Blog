@@ -24,11 +24,11 @@ being released.
 
 ## Publication model for now
 
-Publication is deliberately manual. Once this source is approved and committed to `master`,
-the static site will be built and validated locally, then published as a deployment-only
-`gh-pages` branch for GitHub project Pages at `/Heretical-Blog/`. No site is live yet.
-Generated HTML never lands on `master`, and each deployment commit records the source
-revision it came from.
+Publication is deliberately manual. Approved source is committed to `master`, built and
+validated locally, then published as a deployment-only `gh-pages` branch for GitHub project
+Pages at `/Heretical-Blog/`. Generated HTML never lands on `master`, and each deployment
+commit records the source revision it came from. Superproject registration is reviewed
+separately from product publication.
 
 There are no GitHub Actions workflows, repository webhooks, or automatic draft
 generation in this initial phase. Build/deploy automation and event-driven editorial
