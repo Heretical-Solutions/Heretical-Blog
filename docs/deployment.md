@@ -56,7 +56,7 @@ What it does:
 - Re-runs restore, the production build, and the full validation.
 - Writes a per-file SHA-256 manifest and a commit-message template into `artifacts/`.
 - Creates or reuses the `gh-pages` worktree **outside** this working tree — default
-  `${BLOG_TMPDIR:-/tmp/kilo}/heretical-blog-gh-pages`, override with `--deploy-dir` or
+  `${BLOG_TMPDIR:-${TMPDIR:-/tmp}/heretical-blog}/heretical-blog-gh-pages`, override with `--deploy-dir` or
   `BLOG_DEPLOY_DIR` — and stages only the payload plus `.nojekyll`, protecting the
   worktree's `.git` file during staging.
 - Asserts the staged payload is actually stageable, then prints the source SHA, the commit

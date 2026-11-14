@@ -31,10 +31,10 @@ handles both:
 
 | Trigger | Symptom | Handling |
 |---|---|---|
-| A user gem path containing whitespace, e.g. `GEM_HOME=/SSD1/Ruby gems` | `ruby3.2: invalid option -g` | `GEM_HOME`/`GEM_PATH` are dropped when their value contains whitespace, with a diagnostic |
-| The bundle path itself containing whitespace, which also occurs when Bundler copies itself into it | `ruby3.2: invalid option -D` after a clean restore | When the repository path has whitespace the bundle is placed outside it at `${BLOG_TMPDIR:-/tmp/kilo}/heretical-blog-bundle`; override with `BLOG_BUNDLE_DIR`, which must be whitespace-free |
+| A user gem path containing whitespace, e.g. `GEM_HOME=/path with spaces/gems` | `ruby3.2: invalid option -g` | `GEM_HOME`/`GEM_PATH` are dropped when their value contains whitespace, with a diagnostic |
+| The bundle path itself containing whitespace, which also occurs when Bundler copies itself into it | `ruby3.2: invalid option -D` after a clean restore | When the repository path has whitespace the bundle is placed outside it at `${BLOG_TMPDIR:-${TMPDIR:-/tmp}/heretical-blog}/heretical-blog-bundle`; override with `BLOG_BUNDLE_DIR`, which must be whitespace-free |
 
-So on this machine restored gems live under `/tmp/kilo/heretical-blog-bundle` instead of
+On this machine restored gems live under the product-specific temporary bundle directory instead of
 `vendor/bundle`, and nothing is installed globally or into a shared gem path. In a checkout
 whose path has no whitespace the bundle stays at the ignored `vendor/bundle`.
 `eng/restore.sh` prints the resolved location on every run.
@@ -82,7 +82,7 @@ Five steps, all of which must pass:
    in the future, required `title`/`categories`/`tags`, no per-entry `layout` or `permalink`
    override, comments disabled, draft marker present in `_drafts/` and absent from
    `_posts/`, generated-note source metadata with the
-   `<source-repository>#<pull-request-number>` idempotency key, editorial approval on any
+   public lowercase editorial idempotency key, editorial approval on any
    generated note already published, media references resolving to committed files, non-empty
    alt text, unique slugs, and at least one published post.
 3. **`html-proofer`** — internal links, images, and script references with
