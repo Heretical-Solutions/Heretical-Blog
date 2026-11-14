@@ -11,12 +11,13 @@ source:
   target_branch: develop
   merged_at: 2026-11-14 18:52:37 +0000
   idempotency_key: Heretical-Solutions/Heretical-Development#9
+editorial_approval:
+  reviewer: BenevolentDrone
+  approved_at: 2026-11-14 19:20:08 +0000
 image:
   path: /assets/posts/2026-11-14-ntfy-lan-deployment/android-notifications.webp
   alt: Android ntfy application displaying several timestamped Android test messages from the LAN deployment
 ---
-
-<!-- EDITORIAL DRAFT — NOT APPROVED FOR PUBLICATION. -->
 
 The workspace now has a working ntfy notification service on its trusted development LAN.
 [Superproject PR #9](https://github.com/Heretical-Solutions/Heretical-Development/pull/9)
