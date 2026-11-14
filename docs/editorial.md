@@ -114,8 +114,10 @@ written "generated-style" note remains verifiable.
 - Every asset's license must be recorded here and in `THIRD_PARTY_NOTICES.md` when it is
   third-party.
 
-Currently the site publishes no photography, screenshots, or video, and its only graphics
-are the product-owned favicon set generated from `assets/img/favicons/favicon.svg`.
+The site has no photography or video. The product-owned favicon set is generated from
+`assets/img/favicons/favicon.svg`. The approved Doxygen portal post includes two factual Firefox
+screenshots under `assets/posts/2026-11-14-doxygen-documentation-portal/`; their origin,
+modifications, licensing, and alt text are recorded in the adjacent `captions.md`.
 
 ## Disclosure
 

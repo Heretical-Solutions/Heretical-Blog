@@ -16,8 +16,10 @@ The static payload conveys:
 
 - Generated HTML, the theme's compiled CSS and JavaScript bundles, the theme's
   `assets/js/data/*` endpoints and `site.webmanifest`, the product-owned favicon set (which
-  replaces the theme's upstream artwork), `assets/feed.xml`, `assets/robots.txt`,
+  replaces the theme's upstream artwork),   `assets/feed.xml`, `assets/robots.txt`,
   `404.html`, this product's `LICENSE`, and the upstream texts under `/licenses/`.
+  Post-specific screenshots are distributed only when their approved post is promoted;
+  unapproved drafts and their content remain outside the production payload.
 - Nothing else. No Ruby gem, no native library, no build script, and no repository
   documentation is placed in the payload.
 
@@ -181,9 +183,20 @@ need this document updated in the same commit.
   repository's license). No stock or generated illustration is published.
 - Authored posts are MIT, matching the repository code. The theme's default post-license
   footer text is overridden to state this.
-- No photographs, screenshots, video, or other media are currently published. Any future
-  media must record origin, author, license, and modifications in
-  `docs/editorial.md`'s provenance rules before it is committed.
+- No photography or video is currently published. Any future media must record origin,
+  author, license, and modifications in `docs/editorial.md`'s provenance rules before it is
+  committed.
+- The approved Doxygen portal post includes two factual Firefox screenshots under
+  `assets/posts/2026-11-14-doxygen-documentation-portal/`, converted without content edits
+  from PNG to WebP. Their `captions.md` records origin, capture revisions, licensing,
+  modifications, and alt text. The screenshots are blog-owned captures of Heretical-owned
+  content under MIT. Their rendered third-party components are Doxygen Awesome CSS 2.5.0
+  and Doxygen-generated JavaScript (MIT) and Material Icons glyphs (Apache-2.0), sourced
+  from portal revision `e02da8b27803a4c172a6928bf13976241bdf9c8e`; Doxygen itself is a
+  build-only generator and is not distributed in the images. Visible Doxygen attribution is
+  preserved, and the portal distributes its applicable license texts under
+  `https://heretical-solutions.github.io/Heretical-Documentation/licenses/`. The post has
+  received editorial approval; website deployment remains a separately authorized operation.
 
 ## Obligations summary
 
