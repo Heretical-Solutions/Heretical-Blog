@@ -11,6 +11,9 @@ source:
   target_branch: develop
   merged_at: 2026-11-14 18:52:37 +0000
   idempotency_key: Heretical-Solutions/Heretical-Development#9
+image:
+  path: /assets/posts/2026-11-14-ntfy-lan-deployment/android-notifications.webp
+  alt: Android ntfy application displaying several timestamped Android test messages from the LAN deployment
 ---
 
 <!-- EDITORIAL DRAFT — NOT APPROVED FOR PUBLICATION. -->
@@ -59,6 +62,11 @@ proof of high availability or guaranteed delivery.
 Android accepts the server when its complete `http://` URL is supplied. Plain-HTTP delivery
 can still be limited to opening or refreshing the application, so the current setup does not
 promise instant background push on mobile devices.
+
+![The ntfy Android application displaying the LAN deployment's test notifications](/assets/posts/2026-11-14-ntfy-lan-deployment/android-notifications.webp)
+
+The supplied Android capture shows the test messages arriving in the application. It is a
+client-delivery observation, not a claim about delivery when the server or LAN is unavailable.
 
 ## Backups and remaining work
 
