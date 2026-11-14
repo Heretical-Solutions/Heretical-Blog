@@ -186,6 +186,13 @@ need this document updated in the same commit.
 - No photography or video is currently published. Any future media must record origin,
   author, license, and modifications in `docs/editorial.md`'s provenance rules before it is
   committed.
+- The approved ntfy LAN deployment post includes a user-supplied Android screenshot under
+  `assets/posts/2026-11-14-ntfy-lan-deployment/`, converted without content edits from PNG
+  to WebP. Its `captions.md` records origin, disclosure, licensing, modifications and alt
+  text. The factual capture depicts the upstream ntfy Android application
+  (<https://github.com/binwiederhier/ntfy-android>); no application executable, source,
+  library or separate artwork file is distributed. Editorial approval is recorded in the
+  post's front matter; website deployment remains a separately authorized operation.
 - The approved Doxygen portal post includes two factual Firefox screenshots under
   `assets/posts/2026-11-14-doxygen-documentation-portal/`, converted without content edits
   from PNG to WebP. Their `captions.md` records origin, capture revisions, licensing,

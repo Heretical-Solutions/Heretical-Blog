@@ -118,6 +118,9 @@ The site has no photography or video. The product-owned favicon set is generated
 `assets/img/favicons/favicon.svg`. The approved Doxygen portal post includes two factual Firefox
 screenshots under `assets/posts/2026-11-14-doxygen-documentation-portal/`; their origin,
 modifications, licensing, and alt text are recorded in the adjacent `captions.md`.
+The approved ntfy LAN deployment post includes a user-supplied factual Android screenshot
+under `assets/posts/2026-11-14-ntfy-lan-deployment/`; its provenance is recorded in the
+adjacent `captions.md`. Editorial approval is recorded in the post's front matter.
 
 ## Disclosure
 
