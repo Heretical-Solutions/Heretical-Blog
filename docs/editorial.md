@@ -82,21 +82,19 @@ Generated notes must carry this metadata block, which the validator enforces:
 
 ```yaml
 source:
-  repository: Owner/Repository
-  url: https://github.com/Owner/Repository/pull/123
-  pull_request: 123
-  merge_commit: <40-character SHA>
-  target_branch: develop
-  merged_at: 2026-11-20 08:12:00 +0000
-  idempotency_key: Owner/Repository#123
+  repository: Heretical Development workspace
+  publication: https://heretical-solutions.github.io/Heretical-Documentation/
+  idempotency_key: descriptive-editorial-slug
 editorial_approval:          # required once the note is in _posts/
   reviewer: human-login
   approved_at: 2026-11-21 10:00:00 +0000
 ```
 
-The idempotency key is `<source-repository>#<pull-request-number>`. Repeated, reordered, or
+The idempotency key is a stable public lowercase editorial slug. Repeated, reordered, or
 retried events must produce nothing new, and an existing draft must never be overwritten
-silently. Keep the metadata during editing so the origin stays traceable.
+silently. Private PR numbers, private repository URLs, private source SHAs and machine-local
+paths remain in internal source/compatibility records, not public front matter or prose.
+Public source and deployment provenance remains permitted.
 
 Note: no draft-generation automation exists in this phase. These rules exist so that a later
 automation proposal has a fixed contract to implement against, and so that any manually

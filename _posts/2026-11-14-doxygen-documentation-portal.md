@@ -30,13 +30,13 @@ products that publish no library API.
 
 ## Source and integration
 
-[Superproject PR #7](https://github.com/Heretical-Solutions/Heretical-Development/pull/7)
-registered the portal as an independent submodule. The final publication used these exact
-source revisions:
+A reviewed workspace change registered the portal as an independent submodule. The initial
+publication used pinned source revisions for the private workspace input and public website
+sources:
 
 | Input | Revision |
 |---|---|
-| Superproject `develop` | `5fb634ba67d674994e734be031191ac6f7824be5` |
+| Private workspace documentation | Reviewed source snapshot; exact revision retained in the internal build record |
 | Portal `master` | `e02da8b27803a4c172a6928bf13976241bdf9c8e` |
 | Blog `master` | `1c505359e5b4afb9323906b4b4589b00e676f57f` |
 

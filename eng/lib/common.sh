@@ -53,7 +53,7 @@ if [[ -n "${BLOG_BUNDLE_DIR-}" ]]; then
   [[ "$BUNDLE_TARGET" != *[[:space:]]* ]] ||
     die "BLOG_BUNDLE_DIR must not contain whitespace: $BUNDLE_TARGET"
 elif [[ "$BLOG_ROOT" == *[[:space:]]* ]]; then
-  BUNDLE_TARGET="${BLOG_TMPDIR:-/tmp/kilo}/heretical-blog-bundle"
+  BUNDLE_TARGET="${BLOG_TMPDIR:-${TMPDIR:-/tmp}/heretical-blog}/heretical-blog-bundle"
   log "repository path contains whitespace; keeping the gem bundle outside it at $BUNDLE_TARGET" >&2
 else
   BUNDLE_TARGET="vendor/bundle"

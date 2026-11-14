@@ -4,13 +4,9 @@ date: 2026-11-14 18:55:00 +0000
 categories: [Workspace, Infrastructure]
 tags: [ntfy, notifications, backup, lan]
 source:
-  repository: Heretical-Solutions/Heretical-Development
-  url: https://github.com/Heretical-Solutions/Heretical-Development/pull/9
-  pull_request: 9
-  merge_commit: f46154aa1b205be3bed20a14098bdd76f8bda6fe
-  target_branch: develop
-  merged_at: 2026-11-14 18:52:37 +0000
-  idempotency_key: Heretical-Solutions/Heretical-Development#9
+  repository: Heretical Development workspace
+  publication: https://heretical-solutions.github.io/Heretical-Documentation/md_workspace_2docs_2infrastructure_2ntfy.html
+  idempotency_key: ntfy-lan-deployment-2026-11-14
 editorial_approval:
   reviewer: BenevolentDrone
   approved_at: 2026-11-14 19:20:08 +0000
@@ -20,10 +16,10 @@ image:
 ---
 
 The workspace now has a working ntfy notification service on its trusted development LAN.
-[Superproject PR #9](https://github.com/Heretical-Solutions/Heretical-Development/pull/9)
-merged the deployment, its operational tooling, and shared backup helpers into `develop`.
-This is development infrastructure, not a product release or a notification integration for
-any Heretical application.
+A reviewed workspace change added the deployment, its operational tooling, and shared backup
+helpers. The [public infrastructure policy](https://heretical-solutions.github.io/Heretical-Documentation/md_workspace_2docs_2infrastructure_2ntfy.html)
+describes the service's role and ownership boundaries. This is development infrastructure,
+not a product release or a notification integration for any Heretical application.
 
 ## What is in place
 

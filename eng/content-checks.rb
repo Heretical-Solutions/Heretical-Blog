@@ -20,6 +20,8 @@ DRAFT_MARKER = "EDITORIAL DRAFT"
 UNAPPROVED_MARKERS = [DRAFT_MARKER, "NOT APPROVED FOR PUBLICATION", "PENDING EDITORIAL APPROVAL"].freeze
 IDEMPOTENCY_KEY = /\A([\w.-]+\/[\w.-]+)#(\d+)\z/
 SECRET_FILENAMES = /\A(\.env(\..*)?|.*\.(pem|key|p12|pfx|kerberos|credentials))\z/i
+PRIVATE_SOURCE_URL = %r{https?://github\.com/Heretical-Solutions/Heretical-Development(?:[/?#]|\z)}i
+MACHINE_PATH = %r{(?:/SSD1/|/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|/tmp/kilo(?:/|\b)|[A-Za-z]:\\Users\\)}
 
 EXPECTED = {
   "url" => "https://heretical-solutions.github.io",
@@ -30,7 +32,7 @@ EXPECTED = {
   "theme" => "jekyll-theme-chirpy",
 }.freeze
 
-SOURCE_KEYS = %w[repository url pull_request merge_commit target_branch merged_at idempotency_key].freeze
+SOURCE_KEYS = %w[repository publication idempotency_key].freeze
 
 @failures = []
 @groups = 0
@@ -323,25 +325,22 @@ def validate_source(label, data, kind)
   fail!(label, "generated note is missing source metadata: #{missing.join(', ')}") unless missing.empty?
 
   repository = source["repository"].to_s
-  fail!(label, "source.repository must be owner/repo") unless repository.match?(%r{\A[\w.-]+/[\w.-]+\z})
-
-  key = source["idempotency_key"].to_s
-  unless key.match?(IDEMPOTENCY_KEY)
-    fail!(label, "source.idempotency_key must be <source-repository>#<pull-request-number>")
-  else
-    derived = IDEMPOTENCY_KEY.match(key)
-    fail!(label, "source.idempotency_key repository #{derived[1]} disagrees with source.repository #{repository}") unless derived[1] == repository
-    fail!(label, "source.idempotency_key PR number #{derived[2]} disagrees with source.pull_request #{source['pull_request']}") unless derived[2] == source["pull_request"].to_s
+  fail!(label, "source.repository must be a display name, not a private repository URL") if repository.match?(%r{/|:})
+  fail!(label, "source.pull_request is not permitted in public source metadata") if source.key?("pull_request")
+  %w[url merge_commit target_branch merged_at].each do |key|
+    fail!(label, "source.#{key} is not permitted in public source metadata") if source.key?(key)
   end
 
-  url = source["url"].to_s
-  fail!(label, "source.url must be an https URL for the canonical event") unless url.start_with?("https://")
-  fail!(label, "source.url must point at source.repository") unless url.include?("://github.com/#{repository}/") || url.include?("://#{repository}")
+  key = source["idempotency_key"].to_s
+  unless key.match?(/\A[a-z0-9][a-z0-9-]*[a-z0-9]\z/)
+    fail!(label, "source.idempotency_key must be a public lowercase editorial slug")
+  end
 
-  merge_commit = source["merge_commit"].to_s
-  fail!(label, "source.merge_commit must be a full 40-character SHA") unless merge_commit.match?(/\A\h{40}\z/)
-
-  fail!(label, "source.merged_at must be an explicit timestamp") unless source["merged_at"].is_a?(Time) || source["merged_at"].to_s.match?(/\A\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:Z|[+-]\d{4})\z/)
+  publication = source["publication"].to_s
+  fail!(label, "source.publication must be an https URL") unless publication.start_with?("https://")
+  if publication.include?("github.com/Heretical-Solutions/Heretical-Development")
+    fail!(label, "source.publication must not link to a private repository")
+  end
 
   if kind == :post
     approval = data["editorial_approval"]
@@ -379,6 +378,14 @@ end
 
 Dir.glob(File.join(ROOT, "_drafts", "*.md")).sort.each do |path|
   validate_entry(path, :draft) { |slug| (slugs[slug] ||= []) << "draft" }
+end
+
+check "public editorial content contains no private source links or machine-specific paths" do
+  Dir.glob(File.join(ROOT, "_posts", "*.md")).sort.each do |path|
+    content = File.read(path)
+    fail!(rel(path), "private source repository link is not permitted in public editorial content") if content.match?(PRIVATE_SOURCE_URL)
+    fail!(rel(path), "developer-specific absolute path is not portable/public") if content.match?(MACHINE_PATH)
+  end
 end
 
 check "post and draft slugs are unique" do

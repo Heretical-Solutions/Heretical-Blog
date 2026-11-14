@@ -30,7 +30,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 DEPLOY_BRANCH="gh-pages"
 STAGE_PATH="artifacts/deployment-stage"
 MESSAGE_PATH="artifacts/deployment-commit-message.txt"
-DEPLOY_DIR="${BLOG_DEPLOY_DIR:-${BLOG_TMPDIR:-/tmp/kilo}/heretical-blog-gh-pages}"
+DEPLOY_DIR="${BLOG_DEPLOY_DIR:-${BLOG_TMPDIR:-${TMPDIR:-/tmp}/heretical-blog}/heretical-blog-gh-pages}"
 
 dry_run=false
 ref=""

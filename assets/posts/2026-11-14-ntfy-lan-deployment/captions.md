@@ -7,13 +7,14 @@ Post: `2026-11-14-ntfy-lan-deployment`
 - Origin: user-supplied factual Android screenshot, captured on 2026-11-14 from the working
   ntfy LAN deployment. Original input: `Screenshot_20261114-210523.png` in the operator's
   local sharing folder; the machine-local path is intentionally not published.
-- Capture dimensions: 720 × 1600 pixels.
-- Modification: PNG converted to WebP at quality 88. No cropping, redaction, retouching,
-  text edits, or interface alterations.
-- Visible content: a truncated private-LAN address in the application header and four
-  timestamped `Android test` messages. No credentials, access tokens, account names,
-  personal information, customer data, or secret payloads are visible. The user supplied
-  the image for this development note after reviewing it.
+- Capture dimensions: original 720 × 1600 pixels; published crop 720 × 1300 pixels.
+- Modification: cropped at `(0, 300)` to remove the application/server address bar and
+  status clock, then converted from PNG to WebP at quality 88. No retouching, text edits,
+  redaction within the retained area, or interface alterations.
+- Visible content: timestamped `Android test` messages and the application's message
+  composer/navigation controls. The published crop contains no server address, credentials,
+  access tokens, account names, personal information, customer data, or secret payloads.
+  The user supplied the image for this development note and approved the cleanup.
 - Alt text: Android ntfy application displaying several timestamped Android test messages
   from the LAN deployment.
 - Caption: the ntfy Android application displays test notifications delivered by the

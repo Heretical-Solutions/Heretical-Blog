@@ -6,7 +6,7 @@
 #   --clean   discard the existing bundle before restoring
 #
 # Gems install into the bundle path resolved by eng/lib/common.sh: vendor/bundle when the
-# repository path has no whitespace, otherwise a product-specific directory under /tmp/kilo.
+# repository path has no whitespace, otherwise a product-specific temporary directory.
 # Nothing is installed globally or into the system Ruby gem path.
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"

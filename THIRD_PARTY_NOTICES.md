@@ -187,8 +187,8 @@ need this document updated in the same commit.
   author, license, and modifications in `docs/editorial.md`'s provenance rules before it is
   committed.
 - The approved ntfy LAN deployment post includes a user-supplied Android screenshot under
-  `assets/posts/2026-11-14-ntfy-lan-deployment/`, converted without content edits from PNG
-  to WebP. Its `captions.md` records origin, disclosure, licensing, modifications and alt
+  `assets/posts/2026-11-14-ntfy-lan-deployment/`, cropped to remove the server address bar
+  and converted from PNG to WebP. Its `captions.md` records origin, disclosure, licensing, modifications and alt
   text. The factual capture depicts the upstream ntfy Android application
   (<https://github.com/binwiederhier/ntfy-android>); no application executable, source,
   library or separate artwork file is distributed. Editorial approval is recorded in the

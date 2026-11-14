@@ -17,7 +17,7 @@ Prerequisites for building, validating, and publishing this blog.
 No global or system Ruby gem installation is required or permitted by the authoritative
 commands. The bundle is isolated from system Ruby gems: `vendor/bundle` when the
 repository path contains no whitespace, otherwise a directory outside it (default
-`${BLOG_TMPDIR:-/tmp/kilo}/heretical-blog-bundle`, override with `BLOG_BUNDLE_DIR`). See
+`${BLOG_TMPDIR:-${TMPDIR:-/tmp}/heretical-blog}/heretical-blog-bundle`, override with `BLOG_BUNDLE_DIR`). See
 [`docs/build.md`](build.md) for why a spaced bundle path breaks Bundler's `RUBYOPT` re-exec.
 
 ## Site configuration requirements
