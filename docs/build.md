@@ -101,6 +101,13 @@ Five steps, all of which must pass:
    `404.html`, `feed.xml`, `sitemap.xml`, `robots.txt`, `LICENSE`, and both
     `licenses/*.txt`, including Chirpy Starter) are present; and no starter placeholder value survives.
 
+## Woodpecker workflows
+
+`.woodpecker/restore-validate.yaml` calls the same clean restore and full validation commands
+on the `ci-checks` agent. `.woodpecker/prepare-deployment.yaml` calls
+`eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"` and publishes nothing. Initial triggers
+are manual/cron only; local command evidence does not claim a live agent run.
+
 ## Dependency-order and integration builds
 
 There is no cross-product build. The superproject registers this repository as a submodule

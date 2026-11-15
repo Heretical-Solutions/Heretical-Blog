@@ -37,7 +37,9 @@ repository path contains no whitespace, otherwise a directory outside it (defaul
 
 ## External services
 
-None are required to build or validate.
+No external runtime service is required by the build itself. Woodpecker executes validation
+on the isolated `ci-checks` agent through manual/cron triggers; live scheduling is an
+operator acceptance gate.
 
 - **RubyGems** is contacted by `eng/restore.sh` on a cold cache.
 - **jsDelivr** and **Google Fonts** are contacted by the *visitor's browser* when browsing

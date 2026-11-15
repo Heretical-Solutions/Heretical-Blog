@@ -1,0 +1,38 @@
+# Development blog — non-publishing deployment preparation dry run (Woodpecker CI).
+#
+# Runs the authoritative preparation command in DRY-RUN mode against the exact commit
+# of this pipeline:
+#   eng/prepare-deployment.sh --dry-run "$CI_COMMIT"
+#
+# The dry run restores the locked dependencies, re-runs the same production build and
+# full validation as review, stages ONLY the generated static payload plus .nojekyll
+# under ignored artifacts/deployment-stage, records the exact source SHA and a per-file
+# SHA-256 manifest, prints the gated Git commands, and then STOPS. It creates or touches
+# no branch, worktree, commit, or push, and publishes nothing. Committing and pushing
+# gh-pages requires separate human authorization (docs/deployment.md).
+#
+# This workflow therefore proves the preparation path reproduces a publishable payload
+# from reviewed source WITHOUT publishing it. It is the deployment-preparation gate, not
+# a publication trigger.
+#
+# Triggering is manual/cron only, matching the initial local-only policy. The step image
+# is the digest-pinned official Ruby 3.2.3 (bookworm) image; rsync (used by the
+# preparation staging) is installed from the pinned base distribution. No Docker socket
+# is exposed to the step, and no credential is required (the blog is public).
+
+labels:
+  platform: linux/amd64
+  backend: docker
+  zone: checks
+
+when:
+  - event: [cron, manual]
+    branch: master
+
+steps:
+  prepare-deployment:
+    name: prepare-deployment-dry-run
+    image: ruby:3.2.3-bookworm@sha256:9ee6e94ab254ec61fd08472976a8d0a04d9745de76e9768ccd33f0b7d2fd1be9
+    commands:
+      - apt-get update && apt-get install -y --no-install-recommends rsync
+      - bash eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"

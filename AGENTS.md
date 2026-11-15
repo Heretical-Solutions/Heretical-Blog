@@ -17,20 +17,24 @@ history-separation, dependency, provenance, or licensing rules. Also read
 | Source branch | `master` |
 | Publication branch | `gh-pages`, deployment-only, generated static payload |
 | Published URL | `https://heretical-solutions.github.io/Heretical-Blog/` |
-| Release ownership | This repository; manual static publication, no CI in the initial phase |
+| Release ownership | This repository; ongoing validation on Woodpecker (`.woodpecker/restore-validate.yaml` and a non-publishing `.woodpecker/prepare-deployment.yaml` dry run), manual static publication; no GitHub Actions workflow |
 
 Purpose: record product development progress, engineering decisions, experiments,
 milestones, and releases as concise internal-facing notes published on GitHub Pages.
 
 This repository owns Jekyll/Chirpy configuration, minimal product-owned branding,
 authored editorial content and its media provenance records, the product-owned build and
-validation commands under `eng/`, the static deployment procedure, and its own
+validation commands under `eng/`, its Woodpecker validation workflows
+(`.woodpecker/restore-validate.yaml` and the non-publishing
+`.woodpecker/prepare-deployment.yaml`), the static deployment procedure, and its own
 documentation, licensing, and notices.
 
 It does not own product documentation, changelogs, release notes, architecture decision
-records, planning cards, the documentation portal, GitHub Actions workflows, Pages
+records, planning cards, the documentation portal, any GitHub Actions workflow, Pages
 settings administration outside its own repository, or the superproject's submodule
-registration and policy documents.
+registration and policy documents. The Woodpecker pipelines validate and prepare only;
+they never publish. Publication remains a separate, manually authorized static
+`gh-pages` push.
 
 ## 2. Repository layout
 
@@ -62,6 +66,8 @@ blog/
 ├── Gemfile, Gemfile.lock    # Packaged dependency set; lock is committed
 ├── .ruby-version            # Verified Ruby for version managers
 ├── README.md, LICENSE, THIRD_PARTY_NOTICES.md, AGENTS.md
+├── .woodpecker/restore-validate.yaml      # Clean restore + full validation (manual/cron)
+├── .woodpecker/prepare-deployment.yaml    # Non-publishing deployment-preparation dry run
 └── .gitignore, .gitattributes
 ```
 
@@ -226,8 +232,12 @@ do not solve disclosure by deleting provenance everywhere.
 - Rollback is a `gh-pages` history operation to the last known-good deployment commit; see
   `docs/deployment.md`.
 - No `.github/workflows/`, Actions permissions or secrets, repository webhooks, or
-  content-generation triggers. Build/deploy automation and event-driven drafts are
-  separate later proposals and are not implied by anything in this repository.
+  content-generation triggers. Ongoing validation runs on Woodpecker
+  (`.woodpecker/restore-validate.yaml` and the non-publishing
+  `.woodpecker/prepare-deployment.yaml` dry run), which never publishes; publication remains
+  a separate, manually authorized static `gh-pages` push. Publication automation and
+  event-driven drafts are separate later proposals and are not implied by anything in this
+  repository.
 
 ## 8. Documentation requirements
 
@@ -285,14 +295,15 @@ Doxygen inputs do not apply.
 
 Completion means: a clean standalone restore and `eng/validate.sh` pass from this
 repository alone; drafts are absent from the production payload while approved posts are
-present; the payload reproduces from the pinned revision; documentation, notices, and
-license texts match what is actually consumed and distributed; and no workflow, webhook,
-credential, or generated output is tracked.
+present; the payload reproduces from the pinned revision; documentation, notices, and license
+texts match what is actually consumed and distributed; and no GitHub Actions workflow,
+webhook, credential, or generated output is tracked.
 
 ## 11. Explicit non-goals
 
 Not implemented, and not to be inferred from anything here: GitHub Actions build or Pages
-deployment, protected environments, repository webhooks, merged-PR draft generation,
+deployment (the Woodpecker pipelines validate and prepare only and never publish),
+protected environments, repository webhooks, merged-PR draft generation,
 custom domains or DNS, analytics, comments, PWA/offline caching, search-engine
 verification tokens, invented social profiles, stock or generated media, and any
 third-party source submodule.

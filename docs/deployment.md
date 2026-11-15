@@ -1,8 +1,8 @@
 # Deployment
 
-Manual static publication. This document is the authoritative procedure; the workspace's
-general Actions-based Pages policy is deliberately overridden for this blog by an approved
-interim decision, and the superproject alignment happens at the registration gate.
+Woodpecker performs ongoing validation and non-publishing deployment-preparation dry runs.
+Publication itself remains manual static publication under ADR-0001. This document is the
+authoritative procedure; no GitHub Actions workflow is added for this blog.
 
 ## Output identity
 
@@ -27,6 +27,16 @@ renews the `github.io` certificate.
   building or validating.
 - Push permission to `gh-pages` and Pages administration rights in the repository settings,
   held by the user.
+
+## Woodpecker validation and dry run
+
+`.woodpecker/restore-validate.yaml` runs `eng/restore.sh --clean` and `eng/validate.sh`.
+`.woodpecker/prepare-deployment.yaml` runs
+`eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"`. Both target only the `ci-checks`
+agent and manual/cron triggers while GitHub webhooks are disabled. The dry run builds and
+validates the exact pipeline checkout and records its payload manifest, but never commits
+or pushes `gh-pages`. Live Woodpecker execution is pending repository/agent acceptance;
+local command validation is not represented as a remote pipeline result.
 
 ## Procedure
 
@@ -151,14 +161,13 @@ store is required. Keep the deployment history on `gh-pages` as the operational 
 
 - No credential, token, or secret participates in restore, build, validation, or staging.
 - Remote URLs must be credential-free. Never use a token-bearing remote.
-- No Actions secrets, deployment environments, protected environments, or webhooks exist in
-  this phase.
+- No GitHub Actions secrets, deployment environments, protected environments, or webhooks
+  exist in this phase. Woodpecker validation requires no repository secret.
 - Push and Pages-settings rights remain with the user.
 
 ## Explicitly not deployed
 
-No `.github/workflows/`, no CI status checks, no automatic draft generation, no custom
-domain, no analytics, no comment system, no PWA/service-worker registration, and no
-self-hosted third-party front-end assets. Build/deploy automation and event-driven drafts
-each remain separate later proposals requiring their own approval; this procedure does not
-imply either.
+No `.github/workflows/`, automatic publication, automatic draft generation, custom domain,
+analytics, comment system, PWA/service-worker registration, or self-hosted third-party
+front-end assets. Woodpecker validates and prepares only. Publication and event-driven
+drafts each remain separate operations requiring their own approval.

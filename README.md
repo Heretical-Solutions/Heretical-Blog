@@ -4,9 +4,10 @@ Internal development-progress record for the Heretical workspace, built with
 [Jekyll](https://jekyllrb.com/) and the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy)
 theme, published as a prebuilt static site on GitHub project Pages.
 
-**Status:** initial implementation. Source is prepared on `master`; publication is manual
-through a deployment-only `gh-pages` branch. No CI, webhook, or automatic draft generation
-exists in this phase.
+**Status:** local restore/build/validation passes. Woodpecker validation and non-publishing
+deployment-preparation workflows are implemented but await live repository/agent acceptance.
+Source remains on `master`; publication is manual through a deployment-only `gh-pages`
+branch. There is no GitHub Actions workflow or automatic draft generation.
 
 | Field | Value |
 |---|---|
