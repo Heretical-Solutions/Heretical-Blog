@@ -61,7 +61,12 @@ while (($#)); do
 done
 
 [[ -n "$ref" ]] || die "an explicit <source-ref> is required; this helper never infers what to deploy"
-[[ -d .git ]] || die "this repository must be a Git checkout to record deployment provenance"
+# A linked worktree has a .git FILE pointing at its repository metadata rather
+# than a .git directory. Accept both forms; the explicit source/cleanliness gates
+# below still prevent deploying a generated payload or an unreviewed revision.
+git rev-parse --is-inside-work-tree >/dev/null 2>&1 ||
+  die "this repository must be a Git checkout to record deployment provenance"
+git_dir="$(git rev-parse --absolute-git-dir)"
 
 requested_dir="$DEPLOY_DIR"
 case "$requested_dir" in
@@ -82,7 +87,7 @@ reject_nested "$DEPLOY_DIR"
 log "deployment worktree: $DEPLOY_DIR"
 
 for op in MERGE_HEAD CHERRY_PICK_HEAD REVERT_HEAD BISECT_LOG; do
-  [[ -e ".git/$op" ]] && die "an in-progress Git operation was detected (.git/$op); resolve it first"
+  [[ -e "$git_dir/$op" ]] && die "an in-progress Git operation was detected ($git_dir/$op); resolve it first"
 done
 
 log "resolving selected source revision: $ref"
