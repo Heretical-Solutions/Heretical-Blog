@@ -11,7 +11,10 @@
 require "date"
 require "yaml"
 
-ROOT = File.expand_path("..", __dir__)
+ROOT = ARGV[0] ? File.expand_path(ARGV[0]) : File.expand_path("..", __dir__)
+DISCLOSURE_FIXTURE_ONLY = ARGV[1] == "--disclosure-fixture-only"
+
+
 
 POST_FILENAME = /\A(\d{4}-\d{2}-\d{2})-([a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\.md\z/
 TAG_PATTERN = /\A[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\z/
@@ -21,6 +24,7 @@ UNAPPROVED_MARKERS = [DRAFT_MARKER, "NOT APPROVED FOR PUBLICATION", "PENDING EDI
 IDEMPOTENCY_KEY = /\A([\w.-]+\/[\w.-]+)#(\d+)\z/
 SECRET_FILENAMES = /\A(\.env(\..*)?|.*\.(pem|key|p12|pfx|kerberos|credentials))\z/i
 PRIVATE_SOURCE_URL = %r{https?://github\.com/Heretical-Solutions/Heretical-Development(?:[/?#]|\z)}i
+PRIVATE_PR_REFERENCE = /\bsuperproject\s+pr\s*#\d+\b|github\.com\/Heretical-Solutions\/Heretical-Development\/pull\/\d+/i
 MACHINE_PATH = %r{(?:/SSD1/|/home/[A-Za-z0-9._-]+/|/Users/[A-Za-z0-9._-]+/|/tmp/kilo(?:/|\b)|[A-Za-z]:\\Users\\)}
 
 EXPECTED = {
@@ -101,6 +105,29 @@ end
 
 # ---------------------------------------------------------------------------
 # Configuration
+
+if DISCLOSURE_FIXTURE_ONLY
+  check "public editorial disclosure fixture" do
+    Dir.glob(File.join(ROOT, "{_posts,_drafts}", "*.md")).sort.each do |path|
+      content = File.read(path)
+      fail!(rel(path), "private source repository link is not permitted") if content.match?(PRIVATE_SOURCE_URL)
+      fail!(rel(path), "private PR reference is not permitted") if content.match?(PRIVATE_PR_REFERENCE)
+      fail!(rel(path), "developer-specific absolute path is not permitted") if content.match?(MACHINE_PATH)
+      front = yaml_load(path)[0]
+      next unless front.is_a?(Hash) && front["source"].is_a?(Hash)
+      %w[url pull_request merge_commit target_branch merged_at].each do |key|
+        fail!(rel(path), "source.#{key} is not permitted in public metadata") if front["source"].key?(key)
+      end
+    end
+  end
+  if @failures.empty?
+    puts "disclosure fixture: no findings"
+    exit 0
+  else
+    puts "disclosure fixture: #{@failures.size} finding(s)"
+    exit 1
+  end
+end
 # ---------------------------------------------------------------------------
 
 puts "content-checks: site configuration"
@@ -381,10 +408,19 @@ Dir.glob(File.join(ROOT, "_drafts", "*.md")).sort.each do |path|
 end
 
 check "public editorial content contains no private source links or machine-specific paths" do
-  Dir.glob(File.join(ROOT, "_posts", "*.md")).sort.each do |path|
-    content = File.read(path)
-    fail!(rel(path), "private source repository link is not permitted in public editorial content") if content.match?(PRIVATE_SOURCE_URL)
-    fail!(rel(path), "developer-specific absolute path is not portable/public") if content.match?(MACHINE_PATH)
+  %w[_posts _drafts].each do |collection|
+    Dir.glob(File.join(ROOT, collection, "*.md")).sort.each do |path|
+      content = File.read(path)
+      fail!(rel(path), "private source repository link is not permitted in public editorial content") if content.match?(PRIVATE_SOURCE_URL)
+      fail!(rel(path), "private PR reference is not permitted in public editorial content") if content.match?(PRIVATE_PR_REFERENCE)
+      fail!(rel(path), "developer-specific absolute path is not portable/public") if content.match?(MACHINE_PATH)
+      front = yaml_load(path)[0]
+      if front.is_a?(Hash)
+        %w[url pull_request merge_commit target_branch merged_at].each do |key|
+          fail!(rel(path), "source.#{key} is not permitted in public source metadata") if front["source"].is_a?(Hash) && front["source"].key?(key)
+        end
+      end
+    end
   end
 end
 

@@ -153,6 +153,35 @@ only documented inputs. There is no workspace-source substitution mode.
 
 ## 6. Editorial rules
 
+### Mandatory source classification before drafting
+
+The superproject is **private**. A public blog/portal or public deployment does not make
+its source repository, PR numbers/URLs, source SHAs or live operational identifiers public.
+Before writing any draft, determine whether the source repository is private or public.
+
+For private sources:
+
+- Use `source.repository: Heretical Development workspace`, a public
+  `source.publication` documentation URL and a public lowercase editorial slug.
+- Do **not** include private repository links, `pull/<number>` links, "PR #N" or
+  "superproject PR #N" references, private source SHAs, developer-local paths, live private
+  endpoints, or machine-specific account identifiers in front matter, prose, captions or media.
+- Do not retain `source.url`, `source.pull_request`, `source.merge_commit`,
+  `source.target_branch` or `source.merged_at` in public front matter. Keep exact source
+  provenance in private superproject compatibility/editorial records instead.
+- Describe the change factually as "a reviewed workspace change" and link the public
+  documentation page, not a private implementation PR.
+
+Public upstream source links and revisions are permitted only for genuinely public
+repositories. Apply the same disclosure review to screenshots and other media.
+
+**Draft status is not a disclosure exemption.** `_drafts/` is source in a public repository
+and must pass `eng/content-checks.rb` before review, just like `_posts/`. Inspect the rendered
+output and media before promotion. Exact private source metadata stays in private records;
+do not solve disclosure by deleting provenance everywhere.
+
+### Draft and publication rules
+
 - `_drafts/` is the single draft queue. Do not add a second queue such as
   `content/drafts/`. Promotion to `_posts/` **is** the publication decision and requires
   human approval.
