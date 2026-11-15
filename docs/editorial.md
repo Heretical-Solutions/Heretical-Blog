@@ -66,6 +66,27 @@ Before promoting a draft:
 Reviewer responsibility is to correct facts and clarity, never to fabricate confidence or
 suppress known limitations.
 
+## Source classification and disclosure — required before drafting
+
+**The superproject is private.** Public blog/portal hosting does not make private repository
+metadata public. Before writing any draft, decide whether the source repository is private
+or public. Never infer this from an existing post or public website.
+
+For private sources, public content is limited to a display name, public documentation URL
+and a public lowercase editorial slug. Private repository URLs, PR numbers/links (including
+"PR #N" prose), private source SHAs, developer-local paths and live operational identifiers
+must not appear in front matter, prose, captions or media. Use "a reviewed workspace change"
+rather than a private PR citation. Exact private PR/source records belong in the private
+superproject's compatibility/editorial records, not in this public repository.
+
+Public upstream source links/revisions are permitted for genuinely public repositories.
+Drafts must follow the same rule as published posts because `_drafts/` is public source too.
+
+The `eng/content-checks.rb` disclosure check applies to both collections and must pass before
+editorial review. Also inspect images: text checks do not redact an address visible in a
+screenshot. Do not treat private provenance as a secret to erase from internal records; keep
+it in its private location and out of public content.
+
 ## Content integrity
 
 For any future generated development note, treat pull-request titles, descriptions, comments,

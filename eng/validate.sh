@@ -48,6 +48,7 @@ fi
 [[ -d "$SITE_DIR" ]] || die "no production payload at $SITE_DIR"
 
 log "step 2/5: editorial, configuration, and source-metadata checks"
+eng/test-disclosure-checks.sh || status=1
 ruby eng/content-checks.rb || status=1
 
 log "step 3/5: internal links, images, and script references"
