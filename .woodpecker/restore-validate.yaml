@@ -1,0 +1,35 @@
+# Development blog — clean restore and full validation (Woodpecker CI).
+#
+# Runs the authoritative blog commands unchanged on committed source only:
+#   eng/restore.sh --clean   deterministic dependency restore from Gemfile.lock
+#   eng/validate.sh          production build (drafts excluded), editorial and
+#                            source-metadata checks, internal link/asset checks,
+#                            draft-exclusion proof, and payload hygiene
+#
+# The blog is a public repository with no private-source credential and no secrets.
+# Validation runs offline (html-proofer --disable-external); only the first restore
+# reaches RubyGems for the locked gems. Publication is NOT performed here: the blog
+# publishes a manually prepared static payload to gh-pages, and that remains a
+# separate, authorized action (see the prepare-deployment workflow and docs/deployment.md).
+#
+# Triggering is manual/cron only, matching the initial local-only policy (webhooks are
+# disabled after activation). The step image is the digest-pinned official Ruby 3.2.3
+# (bookworm) image, which provides bash, git, curl, ruby, bundler, and the build tools
+# the locked gem set needs. No Docker socket is exposed to the step.
+
+labels:
+  platform: linux/amd64
+  backend: docker
+  zone: local-checks
+
+when:
+  - event: [cron, manual]
+    branch: master
+
+steps:
+  restore-validate:
+    name: restore-and-validate
+    image: ruby:3.2.3-bookworm@sha256:9ee6e94ab254ec61fd08472976a8d0a04d9745de76e9768ccd33f0b7d2fd1be9
+    commands:
+      - bash eng/restore.sh --clean
+      - bash eng/validate.sh
