@@ -104,7 +104,7 @@ Five steps, all of which must pass:
 ## Woodpecker workflows
 
 `.woodpecker/restore-validate.yaml` calls the same clean restore and full validation commands
-on the `ci-checks` agent. `.woodpecker/prepare-deployment.yaml` calls
+on the `local-checks` agent. `.woodpecker/prepare-deployment.yaml` calls
 `eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"` and publishes nothing. Initial triggers
 are manual/cron only; local command evidence does not claim a live agent run.
 

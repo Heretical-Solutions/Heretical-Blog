@@ -32,7 +32,7 @@ renews the `github.io` certificate.
 
 `.woodpecker/restore-validate.yaml` runs `eng/restore.sh --clean` and `eng/validate.sh`.
 `.woodpecker/prepare-deployment.yaml` runs
-`eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"`. Both target only the `ci-checks`
+`eng/prepare-deployment.sh --dry-run "${CI_COMMIT}"`. Both target only the `local-checks`
 agent and manual/cron triggers while GitHub webhooks are disabled. The dry run builds and
 validates the exact pipeline checkout and records its payload manifest, but never commits
 or pushes `gh-pages`. Live Woodpecker execution is pending repository/agent acceptance;
