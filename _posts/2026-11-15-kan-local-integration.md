@@ -10,6 +10,9 @@ source:
 editorial_approval:
   reviewer: BenevolentDrone
   approved_at: 2026-11-15 15:25:14 +0000
+image:
+  path: /assets/posts/2026-11-15-kan-local-integration/engine-board.webp
+  alt: Heretical Engine planning board in Kan with backlog, in-progress, pending-modification, completed, and suspended work columns
 ---
 
 The workspace now has a working local Kan planning service, a dedicated agent
@@ -68,9 +71,15 @@ recovery rehearsal passed. They covered registration gating, invitations,
 board objects, persistence, archive validation, restored board/card/checklist
 content, and preservation of the original database during a failed restore.
 
-The operator then completed a Trello import successfully. The importer creates
-new boards rather than maintaining continuous synchronization, and repeating an
-import creates duplicates. In this Kan version, comments, attachments, members,
+The operator then completed a Trello import successfully. The resulting Heretical
+Engine board, shown below, organizes planned and completed work without turning
+planning cards into engineering authority.
+
+![Heretical Engine planning board in Kan with backlog, in-progress, pending-modification, completed, and suspended work columns](/assets/posts/2026-11-15-kan-local-integration/engine-board.webp)
+
+The importer creates new boards rather than maintaining continuous
+synchronization, and repeating an import creates duplicates. In this Kan version,
+comments, attachments, members,
 archived items, and due dates are not imported; unnamed labels are dropped and
 exact card ordering is not guaranteed. The successful import is an operator
 acceptance result, not an independent field-by-field audit.

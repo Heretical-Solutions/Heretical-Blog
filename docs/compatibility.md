@@ -3,8 +3,22 @@
 Compatibility records for this website product. Versions come from `Gemfile.lock`; this file
 states what was actually tested rather than what is theoretically supported.
 
-## Tested combination
+## Editorial validation — 2026-11-16
 
+Woodpecker desktop CI progress and the Kan lead-image update passed clean restore,
+production build, all 14 editorial/content groups, disclosure fixtures, 66 internal
+links, 7 fragment checks across 33 HTML files, draft exclusion, approved-post presence,
+and payload hygiene. Five approved posts and 33 HTML files were generated. The exact
+source revision `2fc8a1a7da3dde1e2b32235d32af5be1e4b7ccb8` passed a deployment dry
+run producing 70 files (1,550,569 bytes), `.nojekyll`, and a payload manifest. No
+`gh-pages` commit, push, or live publication was performed by that validation.
+
+Both screenshots are user-supplied factual interface captures. Crops removed account
+identifiers/avatars; their provenance and alt text are recorded in adjacent
+`captions.md`. No private source citation, credential, machine-local path, or secret
+payload was included in the public editorial content.
+
+## Tested combination
 | Input | Version | Status |
 |---|---|---|
 | Operating system | Ubuntu 24.04 LTS, Linux `x86_64-linux-gnu` | Tested |
