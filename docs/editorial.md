@@ -140,6 +140,11 @@ modifications, licensing, and alt text are recorded in the adjacent `captions.md
 The approved ntfy LAN deployment post includes a user-supplied factual Android screenshot
 under `assets/posts/2026-11-14-ntfy-lan-deployment/`; its provenance is recorded in the
 adjacent `captions.md`. Editorial approval is recorded in the post's front matter.
+The Kan planning post now includes the operator-supplied Heretical Engine board image
+under `assets/posts/2026-11-15-kan-local-integration/`, and the Woodpecker desktop CI
+post includes its successful pipeline image under
+`assets/posts/2026-11-16-woodpecker-desktop-ci/`. Both have disclosure-reviewed crops,
+alt text, and adjacent provenance records.
 
 ## Disclosure
 
